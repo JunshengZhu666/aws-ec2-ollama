@@ -42,8 +42,8 @@ curl -fsSL https://ollama.com/install.sh | sh
 ## 6. Clone Repository
 
 ```
-git clone https://github.com/developersdigest/aws-ec2-cuda-ollama.git
-cd aws-ec2-cuda-ollama
+git clone https://github.com/JunshengZhu666/aws-ec2-ollama.git
+cd aws-ec2-ollama
 ```
 
 ## 7. Start Ollama in Background
@@ -55,7 +55,7 @@ ollama serve
 ## 8. Pull Gemma Model
 
 ```
-ollama pull gemma2:2b
+ollama pull qwen2.5vl:7b
 ```
 
 ## 9. Run Go Application
@@ -64,50 +64,6 @@ ollama pull gemma2:2b
 go run main.go
 ```
 
-## 10. Set Up Systemd Service (Optional)
-
-Create service file:
-```
-sudo vim /etc/systemd/system/ollama-api.service
-```
-
-Add the following content:
-```
-[Unit]
-Description=Ollama API Service
-After=network.target
-
-[Service]
-ExecStart=/usr/bin/go run /home/ubuntu/aws-ec2-cuda-ollama/main.go
-WorkingDirectory=/home/ubuntu/aws-ec2-cuda-ollama
-User=ubuntu
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Enable and start the service:
-```
-sudo systemctl enable ollama-api.service
-sudo systemctl start ollama-api.service
-```
-
-## 11. Test API
-
-From your local machine:
-```
-curl http://ec2-your-ec2.amazonaws.com:8080/v1/chat/completions \
--H "Content-Type: application/json" \
--H "Authorization: Bearer demo" \
--d '{
-  "model": "gemma2:2b",
-  "messages": [
-    {"role": "user", "content": "Tell me a story about a brave knight"}
-  ],
-  "stream": true
-}'
-```
 
 ## Troubleshooting
 
