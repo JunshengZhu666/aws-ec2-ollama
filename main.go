@@ -28,10 +28,10 @@ func handleProxy(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	log.Printf("Received request: %s %s", r.Method, r.URL.Path)
+	//log.Printf("Received request: %s %s", r.Method, r.URL.Path)
 
 	// Log the request body
-	logRequest(r)
+	//logRequest(r)
 
 	// Parse the URL of the Ollama server
 	target, err := url.Parse(ollamaURL)
